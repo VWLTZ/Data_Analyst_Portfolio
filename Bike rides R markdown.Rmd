@@ -1,0 +1,230 @@
+---
+title: "Bike Rides - Google Data Analytics Capstone"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-05-07'
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+## Background Information
+
+The marketing analyst team wants to understand the riding habits of
+casual riders and annual members to design a new marketing strategy that
+will convert casual riders into annual members.
+
+This case study will answer the following key business question:
+
+How do annual members and casual riders use bikes differently?
+
+The six steps of the data analysis process will be used as a guideline :
+Ask, Prepare, Process, Analyze, Share and Act.
+
+# 1. ASK
+
+A statement of the business task: Because annual members are more
+profitable than casual riders, it is necessary to develop a marketing
+strategies that will convert casual riders into annual members.
+
+The key stakeholders are: 1-Lily Moreno: Manager and director of
+marketing. 2-The executive team: The executives must approve of the
+recommendations from this case study.
+
+# 2. PREPARE
+
+12 months of bike share data (05/2021-04/2022) was extracted as 12 .csv
+files.
+
+Data Organization & Description: File naming convention: YYYY_MM File
+Type: csv format
+
+# 3. PROCESS
+
+I used RStudio for data verification and cleaning because of the file
+size.
+
+## Setting Up the Environment - Loading library
+
+```{r}
+library(janitor)
+library(tidyverse)
+library(lubridate)
+library(scales)
+install.packages("metR")
+library(metR)
+```
+
+## Create dataframes
+
+12 months of bike share data (05/2021-04/2022) was extracted as 12 .csv
+files.
+
+Data Organization & Description: File naming convention: YYYY_MM File
+Type: csv format
+
+```{r}
+DF1 <- read_csv("202105-divvy-tripdata.csv")
+DF2 <- read_csv("202106-divvy-tripdata.csv")
+DF3 <- read_csv("202107-divvy-tripdata.csv")
+DF4 <- read_csv("202108-divvy-tripdata.csv")
+DF5 <- read_csv("202109-divvy-tripdata.csv")
+DF6 <- read_csv("202110-divvy-tripdata.csv")
+DF7 <- read_csv("202111-divvy-tripdata.csv")
+DF8 <- read_csv("202112-divvy-tripdata.csv")
+DF9 <- read_csv("202201-divvy-tripdata.csv")
+DF10 <- read_csv("202202-divvy-tripdata.csv")
+DF11 <- read_csv("202203-divvy-tripdata.csv")
+DF12 <- read_csv("202204-divvy-tripdata.csv")
+```
+
+## Combine dataframes into one dataset
+
+```{r}
+bike_rides <- rbind(DF1,DF2,DF3,DF4,DF5,DF6,DF7,DF8,DF9,DF10,DF11,DF12)
+```
+
+## Summary of dataset
+
+```{r}
+summary(bike_rides)
+```
+
+```{r}
+ colnames(bike_rides)  #List of column names
+ dim(bike_rides)  #Dimensions of the data frame
+ head(bike_rides)  #See the first 6 rows of data frame
+ str(bike_rides)  #See list of columns and data types (numeric, character, etc)
+```
+
+## Cleaning Data
+
+## Remove Duplicate Riders by Ride ID and Print the Results
+
+```{r}
+bike_rides_v2 <- bike_rides[!duplicated(bike_rides$ride_id), ]
+print(paste("Removed", nrow(bike_rides) - nrow(bike_rides_v2), "duplicated rows"))
+```
+
+## Date/Time Data Cleaning
+
+```{r}
+bike_rides_v2$started_at <- as.POSIXct(bike_rides_v2$started_at, "%Y-%m-%d %H:%M:%S", TZ="GMT")
+```
+
+```{r}
+bike_rides_v2$ended_at <- as.POSIXct(bike_rides_v2$ended_at, "%Y-%m-%d %H:%M:%S", TZ="GMT")
+```
+
+```{r}
+bike_rides_v2 <- bike_rides_v2 %>%
+mutate(ride_time_m = as.numeric(bike_rides_v2$ended_at - bike_rides_v2$started_at) / 60)
+summary(bike_rides_v2$ride_time_m)
+```
+
+## Get rid of scientific notation
+
+```{r}
+options(scipen=999)
+```
+
+# 4. ANALYZE
+
+## Casuals v Members Distribution
+
+```{r}
+ggplot(bike_rides_v2, aes(member_casual, fill=member_casual)) +
+    geom_bar(color = "black") +
+    labs(x="Casual vs Members", title="Casual vs Members Distribution") +
+    theme_minimal() +
+    scale_y_continuous(labels  = 
+                       label_number(scale = 1e-5, prefix = "", suffix = "M", accuracy = 1)) 
+```
+
+## Year Month Data Manipultation
+
+```{r}
+bike_rides_v2 <- bike_rides_v2  %>%
+  mutate(year_month = paste(strftime(bike_rides_v2$started_at, "%Y"),
+      "-",
+      strftime(bike_rides_v2$started_at, "%m"),                
+      paste("(",strftime(bike_rides_v2$started_at, "%b"), ")", sep="")))
+unique(bike_rides_v2$year_month)
+```
+
+## Monthly Distribution Member v Casual
+
+```{r}
+bike_rides_v2 %>%
+  ggplot(aes(year_month, fill=member_casual)) +
+  geom_bar(color = "black") +
+  labs(x="Month", title="Monthly Distribution") +
+  coord_flip()+
+  theme_minimal() +
+  scale_y_continuous(labels  = 
+  label_number(scale = 1e-5, prefix = "", suffix = "M", accuracy = 1)) 
+```
+
+## Weekday Data Manipulation
+
+```{r}
+bike_rides_v2 <- bike_rides_v2 %>%
+  mutate(weekday = paste(strftime(bike_rides_v2$ended_at, "%u"), "-", strftime(bike_rides_v2$ended_at, "%A")))
+unique(bike_rides_v2$weekday)
+```
+
+## Weekday Distribution
+
+```{r}
+ ggplot(bike_rides_v2, aes(weekday, fill=member_casual)) +
+  geom_bar(color = "black") +
+  labs(x="Weekday", title="Weekday Distribution") +
+  theme_minimal() +
+  scale_y_continuous(labels  = 
+  label_number(scale = 1e-5, prefix = "", suffix = "M", accuracy = 1)) 
+```
+
+## Start Hour Data Manipulation
+
+```{r}
+ bike_rides_v2 <- bike_rides_v2 %>%
+  mutate(start_hour = strftime(bike_rides_v2$ended_at, "%H"))
+unique(bike_rides_v2$start_hour)
+```
+
+## Hours in a Day
+
+```{r}
+bike_rides_v2 %>%
+  ggplot(aes(start_hour, fill=member_casual)) +
+  labs(x="Hour In A Day", title="Hour Distribution") +
+  geom_bar(color = "black") +
+  theme_minimal() 
+```
+
+```{r}
+## Hour-Day / Weekday 
+bike_rides_v2 %>%
+  ggplot(aes(start_hour, fill=member_casual)) +
+  geom_bar(color = "black") +
+  labs(x="Hour In A Day", title="Distribution By hour In A Day Divided By Weekday") +
+  facet_wrap(~ weekday) +
+   theme_minimal() 
+```
+
+# 5. SHARE
+
+The Monthly Distribution visualization shows that during winter there
+are significantly less casual riders than member riders. The Weekday
+Distribution visualization shows that casual riders use bikes less than
+members on weekdays. The Distribution By hour In A Day Divided By
+Weekday visualization confirms that casual riders use bikes less than
+members on weekdays espeicially during hours 00-06.
+
+# 6. ACT
+
+Marketing campaign: To convince casual riders to subscribe to a
+membership offer a discount for weekend rides. For example, casual
+riders save X% on rides during peak hours (07-15) on weekends by
+subscribing.
