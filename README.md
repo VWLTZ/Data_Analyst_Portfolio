@@ -11,7 +11,7 @@ This repository showcases skills and projects to track my progress in the field 
 ## Table of contents
 - [About](#about)
 - [Portfolio Projects](#portfolio-projects)
-	+ [Google Python Class](#google-python-class)
+	+ [Google-Data-Analytics-Capstone](#Google-Data-Analytics-Capstone)
 	+ [Tableau Vizzes](#tableau-vizzes)
 - [Certificates](#certificates)
 - [Contacts](#contacts)
@@ -19,9 +19,9 @@ This repository showcases skills and projects to track my progress in the field 
 ## Portfolio Projects
 The following is a descriptive list of data analytics projects.
 
-### Google Python Class
-**Description:** -- [Google](https://developers.google.com/edu/python). Topics covered: --.  
-**Repository:** -- [go to repo..](https://github.com/)  
+### Google-Data-Analytics-Capstone
+**Description:** -- Google Data Analytics Capstone[Google].  
+**Repository:** -- Google-Data-Analytics-Capstone - A case study on the cyclistic data set[go to repo..](https://github.com/)  
 **Status:** Completed in May 2022.  
 
 ### Tableau Vizzes
@@ -29,8 +29,12 @@ The following is a descriptive list of data analytics projects.
 **Status:** ∞  
 
 ## Certificates
-A list of my certifications:
-- [Data Analyst Specialization](https://drive.google.com/file/d/16WKsX7z5LpMo1VxpZc7CQsWNzYfUzB6f/view?usp=sharing) (May 2022) (Coursea.org)
+Data Analytics Certificate - Hosted on Coursera, this fully online program provides the following skills: 
+Data types and structures
+Using data to solve problems
+How to analyze data
+Data storytelling with visualizations
+Using R programming to supercharge your analysis[Data Analyst Specialization](https://grow.google/certificates/data-analytics/#?modal_active=none) (May 2022) (Coursea.org)
 
 ## Contacts
 - LinkedIn: [@VWLTZ](https://www.linkedin.com/in/)
