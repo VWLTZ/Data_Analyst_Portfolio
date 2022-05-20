@@ -21,7 +21,7 @@ The following is a descriptive list of data analytics projects.
 
 ### Google-Data-Analytics-Capstone
 **Description:** -- Google Data Analytics Capstone[Google].  
-**Repository:** -- Google-Data-Analytics-Capstone - A case study on the cyclistic data set[go to repo..](https://github.com/)  
+**Repository:** -- Google-Data-Analytics-Capstone - A case study on the cyclistic data set[go to repo..](https://github.com/VWLTZ/Data_Analyst_Portfolio/commit/995bc225b8af91568c880fabdc9165a0f958d535)  
 **Status:** Completed in May 2022.  
 
 ### Tableau Vizzes
@@ -37,8 +37,5 @@ Data storytelling with visualizations
 Using R programming to supercharge your analysis[Data Analyst Specialization](https://grow.google/certificates/data-analytics/#?modal_active=none) (May 2022) (Coursea.org)
 
 ## Contacts
-- LinkedIn: [@VWLTZ](https://www.linkedin.com/in/)
-- Telegram: [@VWLTZ](https://t.me/)
-- Twitter: [@VWLTZ](https://twitter.com/)
-- E-mail: 
+- E-mail: jwwork522@gmail.com
 
