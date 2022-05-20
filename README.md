@@ -12,7 +12,6 @@ This repository showcases skills and projects to track my progress in the field 
 - [About](#about)
 - [Portfolio Projects](#portfolio-projects)
 	+ [Google-Data-Analytics-Capstone](#Google-Data-Analytics-Capstone)
-	+ [Tableau Vizzes](#tableau-vizzes)
 - [Certificates](#certificates)
 - [Contacts](#contacts)
 
@@ -23,10 +22,6 @@ The following is a descriptive list of data analytics projects.
 **Description:** -- Google Data Analytics Capstone[Google].  
 **Repository:** -- Google-Data-Analytics-Capstone - A case study on the cyclistic data set[go to repo..](https://github.com/VWLTZ/Data_Analyst_Portfolio/commit/995bc225b8af91568c880fabdc9165a0f958d535)  
 **Status:** Completed in May 2022.  
-
-### Tableau Vizzes
-**Description:** My Tableau Public account ---> [go to Tableau..](https://public.tableau.com/profile/)  
-**Status:** ∞  
 
 ## Certificates
 Data Analytics Certificate - Hosted on Coursera, this fully online program provides the following skills: 
